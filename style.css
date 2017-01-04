@@ -899,3 +899,7 @@ object {
 .abt-left {
     margin-bottom: 5%;
 }
+
+.social-icons a{
+	color: #000;
+}

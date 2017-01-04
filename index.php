@@ -27,6 +27,8 @@ get_header(); ?>
 		<?php
 		if ( have_posts() ) :
 
+			$post_no = 1;
+
 			if ( is_home() && ! is_front_page() ) : ?>
 
 			<?php
@@ -40,11 +42,19 @@ get_header(); ?>
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/grid-loop');
 
+				if($post_no == 1){
+					get_template_part( 'template-parts/first-post');
+				}else{
+					get_template_part( 'template-parts/grid-loop');
+				}
+				
+
+
+				$post_no++;
 			endwhile;
 
-			//the_posts_navigation();
+			the_posts_navigation();
 
 		else :
 

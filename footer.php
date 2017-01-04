@@ -9,13 +9,18 @@
  * @package Coffe_Break
  */
 
+$copyright_text = '© Coffee Break. All Rights Reserved | Theme by  <a href="http://rayhan.info/" target="_blank" class="customize-unpreviewable">@KingRayhan</a>';
+if ( !empty(get_theme_mod('footer_copyright')) ) {
+	$copyright_text = get_theme_mod('footer_copyright');
+} 
+
 ?>
 	<?php echo get_template_part('template-parts/carousel'); ?>
 
 	<div class="footer">
 		<div class="container">
 			<div class="footer-text">
-				<p>© <?php date('Y') ?> Coffee Break. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+				<p><?php echo $copyright_text; ?></p>
 			</div>
 		</div>
 	</div>

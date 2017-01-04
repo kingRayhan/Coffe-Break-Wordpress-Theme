@@ -36,7 +36,17 @@
 	<div class="header-top">
 		<div class="container">
 			<div class="head-main">
-				<a href="<?php bloginfo('home'); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo-1.png" alt="" /></a>
+				<a href="<?php bloginfo('home'); ?>">
+				<?php 
+				$logo_url = get_template_directory_uri().'/images/logo-1.png';
+				if ( !empty(get_theme_mod('coffee_website_logo')) ) {
+					$logo_url = get_theme_mod('coffee_website_logo');
+				} 
+				?>
+
+				<img src="<?php echo $logo_url; ?>" alt="" />
+
+				</a>
 			</div>
 		</div>
 	</div>
@@ -58,16 +68,14 @@
 
 			<div class="header-right">
 				<div class="search-bar">
-					<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-					<input type="submit" value="">
+					<form action="<?php bloginfo('home'); ?>">
+						<input type="text" value="<?php echo get_search_query(); ?>" placeholder="Search" name="s">
+						<input type="submit" value="">
+					</form>
 				</div>
-				<ul>
-					<li><a href="#"><span class="fb"> </span></a></li>
-					<li><a href="#"><span class="twit"> </span></a></li>
-					<li><a href="#"><span class="pin"> </span></a></li>
-					<li><a href="#"><span class="rss"> </span></a></li>
-					<li><a href="#"><span class="drbl"> </span></a></li>
-				</ul>
+				<div class="social-icons">
+					<?php social_icons(); ?>
+				</div>
 			</div>
 				<div class="clearfix"></div>
 			</div>

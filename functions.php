@@ -43,6 +43,7 @@ function coffeebreak_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	add_image_size('grid_loop_thumb' , 350 , 250);
+	add_image_size('thumb_700_400' , 700 , 400);
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
@@ -110,6 +111,7 @@ function coffeebreak_scripts() {
 	wp_enqueue_style( 'coffeebreak-style', get_stylesheet_uri() );
 
 	wp_enqueue_style('bootstrap',get_template_directory_uri().'/css/bootstrap.css');
+	wp_enqueue_style('font-awesome',get_template_directory_uri().'/css/font-awesome.min.css');
 	wp_enqueue_style('theme',get_template_directory_uri().'/css/theme.css');
 
 

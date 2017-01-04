@@ -9,8 +9,13 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<!--about-starts-->
+	<div class="about">
+		<div class="container">
+			<div class="about-main">
+				<div class="col-md-8 about-left">
+
+					<div class="about-tre">
 
 		<?php
 		if ( have_posts() ) : ?>
@@ -31,7 +36,7 @@ get_header(); ?>
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content', get_post_format() );
+				get_template_part( 'template-parts/first-post' );
 
 			endwhile;
 
@@ -42,10 +47,12 @@ get_header(); ?>
 			get_template_part( 'template-parts/content', 'none' );
 
 		endif; ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php
-get_sidebar();
-get_footer();
+					</div><!-- .about-tre -->
+				</div>
+				<?php get_sidebar(); ?>
+				<div class="clearfix"></div>			
+			</div>		
+		</div>
+	</div>
+	<!--about-end-->
+<?php get_footer(); ?>

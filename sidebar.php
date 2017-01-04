@@ -13,6 +13,8 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 ?>
 
 				<div class="col-md-4 about-right heading">
+					<?php dynamic_sidebar('sidebar-1'); ?>
+
 					<div class="abt-1">
 						<h3>ABOUT US</h3>
 						<div class="abt-one">

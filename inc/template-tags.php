@@ -40,6 +40,35 @@ endif;
 
 
 
+if ( ! function_exists( '_s_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post-date/time and author.
+ */
+function _s_posted_on() {
+	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+	}
+	$time_string = sprintf( $time_string,
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_attr( get_the_modified_date( 'c' ) ),
+		esc_html( get_the_modified_date() )
+	);
+	$posted_on = sprintf(
+		esc_html_x( 'Posted on %s', 'post date', '_s' ),
+		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+	);
+	$byline = sprintf(
+		esc_html_x( 'by %s', 'post author', '_s' ),
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+	);
+	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+}
+endif;
+
+
+
 
 if ( ! function_exists( 'coffeebreak_posted_date' ) ) :
 function coffeebreak_posted_date() {
@@ -152,12 +181,46 @@ add_action( 'edit_category', 'coffeebreak_category_transient_flusher' );
 add_action( 'save_post',     'coffeebreak_category_transient_flusher' );
 
 
-function get_coffeebreak_excerpt(){
+function get_coffeebreak_excerpt($words = 200){
 	$content = get_the_excerpt();
 
 	$content_array = explode(" ", $content);
-	$slice = array_slice($content_array, 0 , 200);
+	$slice = array_slice($content_array, 0 , $words);
 	$excerpt = implode(" ", $slice);
 
 	return $excerpt;
 }
+
+
+function social_icons(){ 
+
+
+?>
+	
+	<ul>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_twitter'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_twitter')."'><i class='fa fa-twitter'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_facebook'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_facebook')."'><i class='fa fa-facebook'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_google'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_google')."'><i class='fa fa-google-plus'></i></a></li>"; } ?>
+		
+		<?php if(!empty(get_theme_mod('coffee_break_social_pinterest'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_pinterest')."'><i class='fa fa-pinterest'></i></a></li>"; } ?>
+		
+		<?php if(!empty(get_theme_mod('coffee_break_social_linkedin'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_linkedin')."'><i class='fa fa-linkedin'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_github'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_github')."'><i class='fa fa-github'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_vine'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_vine')."'><i class='fa fa-vine'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_instagram'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_instagram')."'><i class='fa fa-instagram'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_medium'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_medium')."'><i class='fa fa-medium'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_tumblr'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_tumblr')."'><i class='fa fa-tumblr'></i></a></li>"; } ?>
+
+		<?php if(!empty(get_theme_mod('coffee_break_social_youtube'))) { echo "<li><a href='".get_theme_mod('coffee_break_social_youtube')."'><i class='fa fa-youtube'></i></a></li>"; } ?>
+
+	</ul>
+
+<?php }
